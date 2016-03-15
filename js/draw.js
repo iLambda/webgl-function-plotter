@@ -3,6 +3,10 @@ function init() {
   var canvas = document.getElementById("glcanvas");
   // create context
   initGL(canvas)
+  // init shaders
+  initShaders()
+  // init buffers
+  initBuffers()
   // if webgl is running, draw
   if (gl) {
     draw()
@@ -26,7 +30,7 @@ function initShaders() {
   var vertexShader = getShader(gl, "shader-vs");
 
   // create the shader
-  var shaderProgram = gl.createProgram();
+  shaderProgram = gl.createProgram();
   gl.attachShader(shaderProgram, vertexShader);
   gl.attachShader(shaderProgram, fragmentShader);
   gl.linkProgram(shaderProgram);
