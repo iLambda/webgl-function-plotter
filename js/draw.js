@@ -97,6 +97,21 @@ function initBuffers() {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 }
 
+function multMatrix(m) {
+  mvMatrix = mvMatrix.x(m);
+}
+
+function mvTranslate(v) {
+  multMatrix(Matrix.Translation($V([v[0], v[1], v[2]])).ensure4x4());
+}
+
+function setMatrixUniforms() {
+  var pUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+  gl.uniformMatrix4fv(pUniform, false, new Float32Array(perspectiveMatrix.flatten()));
+
+  var mvUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+  gl.uniformMatrix4fv(mvUniform, false, new Float32Array(mvMatrix.flatten()));
+}
 
 function draw() {
   // blacks out the screen
@@ -111,7 +126,7 @@ function draw() {
   perspectiveMatrix = makePerspective(45, 1.0, 0.1, 100.0);
   // load identity
   mvMatrix = Matrix.I(4);
-  multMatrix(Matrix.Translation($V([v[0], v[1], v[2]])).ensure4x4());
+  mvTranslate([-0.0, 0.0, -6.0]);
   // bind buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, squareVerticesBuffer);
   gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
