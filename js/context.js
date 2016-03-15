@@ -17,7 +17,7 @@ function initGL(canvas) {
   // sets global var gl to null
   gl = null;
   // try to retreive standard gl context
-  try { gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl"); }
+  try { gl = canvas.getContext("webgl", {antialias: false}) || canvas.getContext("experimental-webgl", {antialias: false}); }
   catch(e) { }
   // that feel when no GL
   if (!gl) {
