@@ -82,6 +82,22 @@ function getShader(gl, id) {
   return shader;
 }
 
+function initBuffers() {
+  // initialize the buffer
+  squareVerticesBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, squareVerticesBuffer);
+  // the vertex set
+  var vertices = [
+    1.0,  1.0,  0.0,
+    -1.0, 1.0,  0.0,
+    1.0,  -1.0, 0.0,
+    -1.0, -1.0, 0.0
+  ];
+  // bind the buffer
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+}
+
+
 function draw() {
   // blacks out the screen
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -89,5 +105,17 @@ function draw() {
   gl.enable(gl.DEPTH_TEST);
   gl.depthFunc(gl.LEQUAL);
   // clears screen & depth buffer
-  gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);      // Efface les couleurs et le buffer de profondeur.
+  gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+
+  // creates the persp. matrix
+  perspectiveMatrix = makePerspective(45, 1.0, 0.1, 100.0);
+  // load identity
+  mvMatrix = Matrix.I(4);
+  mvTranslate([-0.0, 0.0, -6.0]);
+  // bind buffer
+  gl.bindBuffer(gl.ARRAY_BUFFER, squareVerticesBuffer);
+  gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
+  setMatrixUniforms();
+  // draw
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 }
