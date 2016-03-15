@@ -111,7 +111,7 @@ function draw() {
   perspectiveMatrix = makePerspective(45, 1.0, 0.1, 100.0);
   // load identity
   mvMatrix = Matrix.I(4);
-  mvTranslate([-0.0, 0.0, -6.0]);
+  multMatrix(Matrix.Translation($V([v[0], v[1], v[2]])).ensure4x4());
   // bind buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, squareVerticesBuffer);
   gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
