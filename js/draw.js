@@ -16,5 +16,5 @@ function draw() {
   gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
   setMatrixUniforms();
   // draw
-  gl.drawArrays(gl.LINE_STRIP, 0, 4);
+  gl.drawArrays(gl.LINE_LOOP, 0, 4);
 }
