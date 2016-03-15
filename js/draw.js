@@ -7,6 +7,8 @@ function draw() {
   // clears screen & depth buffer
   gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
 
+
+
   // creates the persp. matrix
   perspectiveMatrix = makePerspective(45, 1.0, 0.1, 100.0);
   // load identity
@@ -16,5 +18,5 @@ function draw() {
   gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
   setMatrixUniforms();
   // draw
-  gl.drawArrays(gl.LINE_LOOP, 0, 4);
+  gl.drawArrays(gl.LINE_LOOP, 0, vertices.length/3);
 }
