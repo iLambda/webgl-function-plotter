@@ -1,7 +1,7 @@
 function initMesh() {
   // the vertex set
   vertices = grid(4, 10, function (i, j) {
-    return (Math.abs(i - 5) * Math.abs(j - 5)) / 50
+    return 0
   })
 }
 
