@@ -31,6 +31,14 @@ function grid(size, n, heightFunc) {
       mesh.push(i*step - half,(j+1)*step -half, heightFunc(i,j+1))
     }
     mesh.push((i+1)*step - half, j*step -half, heightFunc(i+1,j))
+    for (var j = n-1; j >= 0; j--) {
+      mesh.push(i*step - half, j*step - half, heightFunc(i,j))
+      mesh.push(i*step - half,(j+1)*step -half, heightFunc(i,j+1))
+      mesh.push(i*step - half, (j+1)*step - half, heightFunc(i,j+1))
+      mesh.push((i+1)*step - half, (j+1)*step - half, heightFunc(i+1,j+1))
+      mesh.push((i+1)*step - half, j*step - half, heightFunc(i+1,j))
+      mesh.push(i*step - half, j*step - half, heightFunc(i,j))
+    }
   }
   return mesh
 

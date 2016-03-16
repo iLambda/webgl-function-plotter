@@ -1,8 +1,25 @@
+planet = function (i, j) {
+  var iF = i - 100/2
+  var jF = j - 100/2
+  var variance = 2
+  var amplitude = 1.5
+  return -amplitude * Math.exp(-Math.pow(iF/(2*variance), 2) - Math.pow(jF/(2*variance), 2))
+}
+
+bhole = function (i, j) {
+  var iF = i - 100/2
+  var jF = j - 100/2
+
+  var variance = 2
+  var amplitude = 20
+  return -amplitude * Math.exp(-Math.pow(iF/(2*variance), 2) - Math.pow(jF/(2*variance), 2))
+
+}
+
+
 function initMesh() {
   // the vertex set
-  vertices = grid(10, 25, function (i, j) {
-    return 0
-  })
+  vertices = grid(0.4 * 100, 100, planet)
 }
 
 function draw(canvas) {
