@@ -6,20 +6,26 @@ planet = function (i, j) {
   return -amplitude * Math.exp(-Math.pow(iF/(2*variance), 2) - Math.pow(jF/(2*variance), 2))
 }
 
-bhole = function (i, j) {
-  var iF = i - 100/2
-  var jF = j - 100/2
-
+noise = function (i, j) {
   var variance = 2
   var amplitude = 20
-  return -amplitude * Math.exp(-Math.pow(iF/(2*variance), 2) - Math.pow(jF/(2*variance), 2))
 
+  return amplitude * Math.sin(i + j)
+}
+
+gravwave = function (i, j) {
+  var variance = 2
+  var amplitude = 1
+
+  var r = i*i + j*j
+  var cos = function (f) { return f <= 3.5 * Math.PI ? Math.cos(f) : 0 }
+  return amplitude * cos(Math.sqrt(r) / variance)
 }
 
 
 function initMesh() {
   // the vertex set
-  vertices = grid(0.4 * 100, 100, planet)
+  vertices = grid(0.4 * 100, 200, gravwave)
 }
 
 function draw(canvas) {
