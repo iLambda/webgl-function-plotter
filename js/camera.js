@@ -4,9 +4,23 @@ function initCamera(canvas, drawScene) {
     delta: { x: 0, y: 0 },
     mousePos: { x:0, y:0 },
 
-    angle: [0, 0],
+    angle: [0, 0, 0],
+    zoom: 1,
     sensivity: 0.005
   }
+
+  // add mouse wheel listener
+  canvas.addEventListener('mousewheel',function(event){
+    // zoom
+    canvas.camera.zoom += (event.wheelDelta / 1200)
+    canvas.camera.zoom = canvas.camera.zoom < 0.1 ? 0.1 : canvas.camera.zoom
+    // draw scene
+    drawScene(canvas)
+    // cancel
+    return false
+  }, false)
+
+  // add mouse move listener
   canvas.addEventListener('mousemove', function(evt) {
     // gets mouse position
     canvas.camera.mousePos = getMousePos(canvas, evt);
@@ -17,16 +31,17 @@ function initCamera(canvas, drawScene) {
       y: canvas.camera.mousePos.y - canvas.camera.oldPos.y
     }
     canvas.camera.delta = delta
-    // compute angle
-    canvas.camera.angle[0] = canvas.camera.angle[0] + delta.y * canvas.camera.sensivity
-    canvas.camera.angle[1] = canvas.camera.angle[1] + delta.x * canvas.camera.sensivity
-    console.log(canvas.camera.angle)
-
-    // draw scene
-    drawScene(canvas);
+    // if clicked
+    if (evt.buttons > 0) {
+      // compute angle
+      canvas.camera.angle[0] = canvas.camera.angle[0] + delta.y * canvas.camera.sensivity
+      canvas.camera.angle[2] = canvas.camera.angle[2] + delta.x * canvas.camera.sensivity
+      // draw scene
+      drawScene(canvas)
+    }
     // save old position
     canvas.camera.oldPos = canvas.camera.mousePos
-  }, false);
+  }, false)
 
 }
 

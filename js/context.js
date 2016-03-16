@@ -109,6 +109,11 @@ function mvTranslate(v) {
 function mvRotate(v) {
   multMatrix(Matrix.RotationX(v[0]).ensure4x4())
   multMatrix(Matrix.RotationY(v[1]).ensure4x4())
+  multMatrix(Matrix.RotationZ(v[2]).ensure4x4())
+}
+
+function mvScale(v) {
+  multMatrix(Matrix.Diagonal(v).ensure4x4())
 }
 
 function setMatrixUniforms() {
