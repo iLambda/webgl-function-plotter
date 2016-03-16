@@ -1,0 +1,5 @@
+x y * 0.74 tan x * 4.94 sin x % min y sin cos * * y 4.09 x % atan2 floor 8.60 x tan - atan2 sqrt x * *
+-> falaise + faille centrale
+	40, 50
+
+
