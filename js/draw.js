@@ -1,6 +1,8 @@
 function initMesh() {
   // the vertex set
-  vertices = grid(4, 10)
+  vertices = grid(4, 10, function (i, j) {
+    return (Math.abs(i - 5) * Math.abs(j - 5)) / 50
+  })
 }
 
 function draw() {
@@ -19,6 +21,7 @@ function draw() {
   // load identity
   mvMatrix = Matrix.I(4)
   mvTranslate([-0.0, 0.0, -6.0])
+  mvRotate([-0.0, 0.0, -6.0])
   // bind buffer
   gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0)
   setMatrixUniforms()
