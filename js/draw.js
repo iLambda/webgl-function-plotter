@@ -5,7 +5,7 @@ function initMesh() {
   })
 }
 
-function draw() {
+function draw(canvas) {
   // blacks out the screen
   gl.clearColor(0.0, 0.0, 0.0, 1.0)
   // activate depth test
@@ -21,7 +21,7 @@ function draw() {
   // load identity
   mvMatrix = Matrix.I(4)
   mvTranslate([-0.0, 0.0, -6.0])
-  mvRotate([-0.0, 0.0, -6.0])
+  mvRotate(canvas.camera.angle)
   // bind buffer
   gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0)
   setMatrixUniforms()

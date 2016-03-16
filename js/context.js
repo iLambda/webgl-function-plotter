@@ -7,11 +7,13 @@ function init() {
   initShaders()
   // init mesh & buffers
   initMesh()
-  initCamera(canvas)
   initBuffers()
   // if webgl is running, draw
   if (gl) {
-    draw()
+    // set camera
+    initCamera(canvas, draw)
+    // first draw
+    draw(canvas)
   }
 }
 
@@ -105,7 +107,8 @@ function mvTranslate(v) {
 }
 
 function mvRotate(v) {
-  multMatrix(Matrix.Rotation($V([v[0], v[1], v[2]])).ensure4x4())
+  multMatrix(Matrix.RotationX(v[0]).ensure4x4())
+  multMatrix(Matrix.RotationY(v[1]).ensure4x4())
 }
 
 function setMatrixUniforms() {
